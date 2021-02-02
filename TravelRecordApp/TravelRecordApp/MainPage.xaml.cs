@@ -17,7 +17,7 @@ namespace TravelRecordApp
 
             var assembly = typeof(MainPage);
 
-            iconImage.Source = ImageSource.FromResource("TravelRecordApp.Assets.Images.rocket.jpeg", assembly);
+            iconImage.Source = ImageSource.FromResource("TravelRecordApp.Assets.Images.rocket.pjng", assembly);
         }
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
@@ -35,6 +35,7 @@ namespace TravelRecordApp
 
                 if (user != null)
                 {
+                    App.users = user;
                     if (user.Password == passwordEntry.Text)
                     {
                         await Navigation.PushAsync(new HomePage());

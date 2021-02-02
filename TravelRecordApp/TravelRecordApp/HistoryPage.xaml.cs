@@ -32,7 +32,7 @@ namespace TravelRecordApp
                 postListView.ItemsSource = posts;
             }
             */
-
+            //get from azure cloud data base 
             var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.users.Id).ToListAsync();
             postListView.ItemsSource = posts;
         }

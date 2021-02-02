@@ -33,14 +33,17 @@ namespace TravelRecordApp
             var center = new Xamarin.Forms.Maps.Position(position.Latitude, position.Longitude);
             var span = new Xamarin.Forms.Maps.MapSpan(center, 2, 2);
             locationsMap.MoveToRegion(span);
-
+            /* this is local data base
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
                 conn.CreateTable<Post>();
                 var posts = conn.Table<Post>().ToList();
 
                 DisplayInMap(posts);
-            }
+            } */
+            //get from azure cloud data base 
+            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.users.Id).ToListAsync();
+            DisplayInMap(posts);
         }
 
         protected override async void OnDisappearing()

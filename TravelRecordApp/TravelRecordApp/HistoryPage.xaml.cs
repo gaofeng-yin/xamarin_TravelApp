@@ -18,10 +18,10 @@ namespace TravelRecordApp
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-
+            /*
             //with using we don't have to worry about close()
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             { 
@@ -31,8 +31,10 @@ namespace TravelRecordApp
 
                 postListView.ItemsSource = posts;
             }
+            */
 
-
+            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.users.Id).ToListAsync();
+            postListView.ItemsSource = posts;
         }
 
         private void postListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

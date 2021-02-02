@@ -67,7 +67,7 @@ namespace TravelRecordApp
                  } */
 
                 await App.MobileService.GetTable<Post>().InsertAsync(post);
-                await DisplayAlert("Success", "Experience succesfully inserter", "Ok");
+                await DisplayAlert("Success", "Experience succesfully inserted", "Ok");
             }
             catch (NullReferenceException nre)
             {

@@ -14,6 +14,11 @@ namespace TravelRecordApp
     public partial class PostDetailPage : ContentPage
     {
         Post selectedPost;
+
+        public PostDetailPage()
+        {
+
+        }
         public PostDetailPage(Post selectedPost)
         {
             InitializeComponent();
@@ -21,47 +26,25 @@ namespace TravelRecordApp
             this.selectedPost = selectedPost;
 
             experienceEntry.Text = selectedPost.Experience;
+            venueLabel.Text = selectedPost.VenueName;
+            categoryLabel.Text = selectedPost.CategoryName;
+            addressLabel.Text = selectedPost.Address;
+            coordinatesLabel.Text = $"{selectedPost.Latitude}, {selectedPost.Longitude}";
+            distanceLabel.Text = $"{selectedPost.Distance} m";
         }
 
-        private void updateButton_Clicked(object sender, EventArgs e)
+        private async void updateButton_Clicked(object sender, EventArgs e)
         {
             selectedPost.Experience = experienceEntry.Text;
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
 
-                conn.CreateTable<Post>();
-                int rows = conn.Update(selectedPost);
-                conn.Close();
-
-                if (rows > 0)
-                {
-                    DisplayAlert("Success", "Experience succesfully updated", "OK");
-                }
-                else
-                {
-                    DisplayAlert("Failure", "Experience not succesfully updated", "OK");
-                }
-            }
+            await App.MobileService.GetTable<Post>().UpdateAsync(selectedPost);
+            await DisplayAlert("Success", "Experience succesfully updated", "Ok");
         }
 
-        private void deleteButton_Clicked(object sender, EventArgs e)
+        private async void deleteButton_Clicked(object sender, EventArgs e)
         {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-
-                conn.CreateTable<Post>();
-                int rows = conn.Delete(selectedPost);
-                conn.Close();
-
-                if (rows > 0)
-                {
-                    DisplayAlert("Success", "Experience succesfully deleted", "OK");
-                }
-                else
-                {
-                    DisplayAlert("Failure", "Experience not succesfully deleted", "OK");
-                }
-            }
+            await App.MobileService.GetTable<Post>().DeleteAsync(selectedPost);
+            await DisplayAlert("Success", "Experience succesfully deleted", "Ok");
         }
     }
 }

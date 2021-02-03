@@ -1,16 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TravelRecordApp.Model
 {
-    public class Users
+    public class Users : INotifyPropertyChanged
     {
-        public string Id { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set 
+            {
+                id = value;
+                OnPropertyChnaged("Id");
+            }
+        }
+
+        private string email;
+
+        public string Email
+        {
+            get { return email; }
+            set 
+            { 
+                email = value;
+                OnPropertyChnaged("Email");
+            }
+        }
+
+        private string password;
+
+        public string Password
+        {
+            get { return password; }
+            set 
+            { 
+                password = value;
+                OnPropertyChnaged("Password");
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChnaged(string propertyName)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public static async Task<bool> Login(string email, string password)
         {
             bool isEmailEmpty = string.IsNullOrEmpty(email);

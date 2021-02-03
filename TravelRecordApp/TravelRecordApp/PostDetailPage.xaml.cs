@@ -37,13 +37,13 @@ namespace TravelRecordApp
         {
             selectedPost.Experience = experienceEntry.Text;
 
-            await App.MobileService.GetTable<Post>().UpdateAsync(selectedPost);
+            Post.update(selectedPost);
             await DisplayAlert("Success", "Experience succesfully updated", "Ok");
         }
 
         private async void deleteButton_Clicked(object sender, EventArgs e)
         {
-            await App.MobileService.GetTable<Post>().DeleteAsync(selectedPost);
+            Post.delete(selectedPost);
             await DisplayAlert("Success", "Experience succesfully deleted", "Ok");
         }
     }

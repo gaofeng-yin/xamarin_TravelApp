@@ -24,26 +24,9 @@ namespace TravelRecordApp
 
             //using(SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             //{ get from azure cloud data base 
-                var postTable = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.users.Id).ToListAsync();
+            var postTable = await Post.Read();
 
-                var categories = (from p in postTable
-                                  orderby p.CategoryId
-                                  select p.CategoryName).Distinct().ToList();
-
-                //this is same the above code snipet: categories == categories2
-              //  var categories2 = postTable.OrderBy(p => p.CategoryId).Select(p => p.CategoryName).Distinct().ToList();
-
-                Dictionary<string, int> categoriesCount = new Dictionary<string, int>();
-                foreach(var category in categories)
-                {
-                    var count = (from post in postTable
-                                 where post.CategoryName == category
-                                 select post).ToList().Count;
-                    //this is the same above code snippet : count == count2
-                    //var count2 = postTable.Where(p => p.CategoryName == category).ToList().Count;
-
-                    categoriesCount.Add(category, count);
-                }
+            var categoriesCount = Post.PostCategories(postTable);
 
                 categoryListView.ItemsSource = categoriesCount;
 

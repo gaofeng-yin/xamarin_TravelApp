@@ -7,8 +7,7 @@
     <TabbedPage.ToolbarItems>
         <ToolbarItem Text="Add"
                      Icon="add.png"
-                     
-                     Clicked="ToolbarItem_Clicked"  />
+                     Command="{Binding NavCommand}"/>
     </TabbedPage.ToolbarItems>
 
     <local:HistoryPage Title="History"

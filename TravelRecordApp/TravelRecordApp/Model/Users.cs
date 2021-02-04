@@ -50,7 +50,9 @@ namespace TravelRecordApp.Model
 
         private void OnPropertyChnaged(string propertyName)
         {
+            if(PropertyChanged != null) { 
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         public static async Task<bool> Login(string email, string password)

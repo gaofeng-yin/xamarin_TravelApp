@@ -14,9 +14,13 @@ namespace TravelRecordApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewTravelPage : ContentPage
     {
+        Post post;
         public NewTravelPage()
         {
             InitializeComponent();
+
+            post = new Post();
+            containerStackLayout.BindingContext = post; 
         }
 
         protected override async void OnAppearing()
@@ -35,18 +39,15 @@ namespace TravelRecordApp
             try { 
             var selectedVenue = venueListView.SelectedItem as Venue;
             var firstCategory = selectedVenue.categories.FirstOrDefault();
-            Post post = new Post()
-            { 
-                    Experience = experienceEntry.Text,
-                    CategoryId = firstCategory.id,
-                    CategoryName = firstCategory.name,
-                    Address = selectedVenue.location.address,
-                    Distance = selectedVenue.location.distance,
-                    Latitude = selectedVenue.location.lat,
-                    Longitude = selectedVenue.location.lng,
-                    VenueName = selectedVenue.name,
-                    UserId = App.users.Id,
-            };
+
+                post.CategoryId = firstCategory.id;
+                post.CategoryName = firstCategory.name;
+                post.Address = selectedVenue.location.address;
+                post.Distance = selectedVenue.location.distance;
+                post.Latitude = selectedVenue.location.lat;
+                post.Longitude = selectedVenue.location.lng;
+                post.VenueName = selectedVenue.name;
+                post.UserId = App.users.Id;
 
                 /* //with using we don't have to worry about close method.
                  using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation)) { 

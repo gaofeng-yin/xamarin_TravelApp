@@ -45,6 +45,18 @@ namespace TravelRecordApp.Model
             }
         }
 
+        private string comfirmPassword;
+
+        public string ComfirmPassword
+        {
+            get { return comfirmPassword; }
+            set
+            {
+                comfirmPassword = value;
+                OnPropertyChnaged("ComfirmPassword");
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -24,10 +24,5 @@ namespace TravelRecordApp
 
             iconImage.Source = ImageSource.FromResource("TravelRecordApp.Assets.Images.rocket.pjng", assembly);
         }
-
-        private void registerUserButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new RegisterPage());
-        }
     }
 }

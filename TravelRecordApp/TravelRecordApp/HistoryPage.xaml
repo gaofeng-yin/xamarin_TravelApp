@@ -10,7 +10,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ListView x:Name="postListView"
-              ItemSelected="postListView_ItemSelected">
+              ItemSelected="postListView_ItemSelected"
+              ItemsSource="{Binding Posts}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell Text="{Binding Experience}"

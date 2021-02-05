@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelRecordApp.Model;
+using TravelRecordApp.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,28 +14,21 @@ namespace TravelRecordApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HistoryPage : ContentPage
     {
+        HistoryVM viewModel;
         public HistoryPage()
         {
             InitializeComponent();
+
+            viewModel = new HistoryVM();
+            BindingContext = viewModel;
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            /*
-            //with using we don't have to worry about close()
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            { 
-                //in case table doesn't exist. It will not replace actual table
-                conn.CreateTable<Post>();
-                var posts = conn.Table<Post>().ToList();
-
-                postListView.ItemsSource = posts;
-            }
-            */
-            //get from azure cloud data base 
-            var posts = await Post.Read();
-            postListView.ItemsSource = posts;
+            
+            viewModel.UpdatedPosts();
+            
         }
 
         private void postListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

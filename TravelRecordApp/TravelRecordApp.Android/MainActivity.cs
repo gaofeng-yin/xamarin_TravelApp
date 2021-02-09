@@ -22,6 +22,7 @@ namespace TravelRecordApp.Droid
 
             base.OnCreate(savedInstanceState);
 
+            global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Exprimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);

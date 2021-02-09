@@ -11,7 +11,8 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout x:Name="containerStackLayout">
+        <StackLayout x:Name="containerStackLayout"
+                     CompressedLayout.IsHeadless="True">
             <Entry x:Name="experienceEntry"
                    Text="{Binding Experience, Mode=TwoWay}"
                    Placeholder="Write your experience" />

@@ -39,5 +39,19 @@ namespace TravelRecordApp
                 Navigation.PushAsync(new PostDetailPage(selectedPost));
             }
         }
+
+        private async void MenuItem_Clicked(object sender, EventArgs e)
+        {
+            var post = (Post)((MenuItem)sender).CommandParameter;
+            viewModel.DeletePost(post);
+
+            await viewModel.UpdatedPosts();
+        }
+
+        private async void postListView_Refreshing(object sender, EventArgs e)
+        {
+            await viewModel.UpdatedPosts();
+            postListView.IsRefreshing = false;
+        }
     }
 }

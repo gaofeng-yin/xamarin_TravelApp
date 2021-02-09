@@ -218,9 +218,16 @@ namespace TravelRecordApp.Model
         {
             await App.MobileService.GetTable<Post>().UpdateAsync(post);
         }
-        public static async void delete(Post post)
+        public static async Task<bool> delete(Post post)
         {
+            try
+            { 
             await App.MobileService.GetTable<Post>().DeleteAsync(post);
+            return true;
+            }catch(Exception ex)
+            {
+                return false;
+            }
         }
 
         private void OnPropertyChnaged(string propertyName)
